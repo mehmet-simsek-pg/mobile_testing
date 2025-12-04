@@ -74,6 +74,16 @@ public class DriverFactory {
     }
 
     public static void quitDriver() {
+        if (driver.get() != null) {
+            try {
+                if (currentPlatform == PlatformType.ANDROID) {
+                    ((AndroidDriver)(driver.get())).quit();
+                } else {
+                    ((IOSDriver)(driver.get())).quit();
+                }
+            } catch (Exception e){}
 
+            driver.remove();
+        }
     }
 }
